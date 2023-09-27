@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+</head>
+<body>
+    <h1>Student List</h1>
+
+    <ul>
+        <% data.forEach(function(student) { %>
+            <li>
+                <strong><%= student.name %></strong>  -  Age: <%= student.age %>
+                <a href="/edit/<%= student._id %>">Edit</a>
+                <form action="/delete/<%= student._id %>" method="POST" style="display: inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+            <!-- <h1><% student.name %></h1><br> -->
+
+
+        <% }); %>
+    </ul>
+
+    <a href="/create">Add New Student</a>
+</body>
+</html>

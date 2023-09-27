@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Student</title>
+</head>
+<body>
+    <h1>Add New Student</h1>
+    <form method="POST" action="/api/student/create-student">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br>
+        <label for="email">email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <!-- Add more fields as needed -->
+        <br>
+        <input type="submit" name="save" >
+  
+        <!-- <button type="submit">Add Student</button> -->
+    </form>
+    <a href="/api/student/get-student">Back to Student List</a>
+</body>
+</html>

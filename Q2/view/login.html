@@ -1,0 +1,60 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+ <h1>
+    Login Page 
+ </h1>   
+
+ <form method="post" action="/user">
+    User Name :- <input type="text" name="username" id="">
+    <br/>
+    <br/>
+
+    Password :- <input type="text" name="password" id="">
+    <br/>
+    <br/>
+
+    <input type="submit" value="Login">
+ </form>
+
+    
+</body>
+</html> -->
+
+<html>
+  <head>
+    <title>User Login</title>
+  </head>
+  <body>
+    Username:
+    <input type="text" id="username" /><br />
+    Password :
+    <input type="password" id="password" /><br />
+    <input type="button" value="Submit" id="submit" />
+  </body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      $("#submit").click(function () {
+        let username = $("#username").val();
+        let password = $("#password").val();
+$.post(
+          "/user",
+          { username: username, password: password },
+          function (data) {
+            // alert(data);
+            window.location.href = "/";
+            if (data == "success") {
+              alert("hello");
+            }
+          }
+        );
+      });
+    });
+  </script>
+</html>
