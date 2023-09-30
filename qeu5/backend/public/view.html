@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        View List
+    </h1>
+
+    <button>
+        <a href="./login.html"> Login</a>
+    </button>
+    <button>
+        <a href="./logout.html"> Logout</a> 
+    </button>
+    <br>
+    <br>
+
+    <table id="displaytable">
+        <tr>
+            <!-- <th>ID</th> -->
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        <tbody id="displaybody">
+        </tbody>
+    </table>
+</body>
+
+<script>
+    $(document).ready(function () {
+        // alert("hello");
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/api/fetch",
+            success: function (data) {
+                const list = $("#displaybody");
+                // console.log("get",list);
+                // console.log(list);
+                list.empty();
+
+                // data.forEach(function(user){
+                //     list.append(`<td>${user._id} </td> <td>${user.username} </td><td>${user.email}</td>`);
+                //     // list.append(``);
+                //     // list.append(`<br/> `);
+
+                //     //     console.log("dara",user);
+                // } )
+                data.forEach(stud => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                            <td>${stud.username}</td>
+                            <td>${stud.email}</td>
+                            <td>
+                                <button type="button" onclick="updatestud('${stud._id}')">Update</button>
+                                <button type="button" id="deletebtn" onclick="deletestud('${stud._id}')">Delete</button>
+                                <button type="button" id="viewbtn" onclick="deletestud('${stud._id}')">View</button>
+                            </td>
+                        `;
+                    displaybody.appendChild(row);
+                });
+
+            },
+            error: function (err) {
+                alert(err)
+                console.log(err);
+            }
+        })
+    })
+
+    function updatestud(id) {
+        // alert(id);
+        window.location.href = `/update.html?id=${id}`;
+    }
+    function deletestud(id) {
+        // alert(id);
+        const studid = id;
+        $.ajax({
+            url: `/api/${studid}`,
+            type: "DELETE",
+            success: function (res) {
+                window.location.reload();
+                console.log(res);
+            },
+            error: function (err) {
+                console.log(error);
+            }
+
+        })
+        // window.location.href = `/api/${id}`;
+    }
+</script>
+
+</html>

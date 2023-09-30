@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Your HTML head content here -->
+</head>
+
+<body>
+    
+    
+    <h1>Create Data</h1> <span> </span>
+    <br>
+    <!-- <form id="myForm" > -->
+    <form action="/api/data" method="POST" enctype="multipart/form-data" id="myForm">
+        Email :-
+        <div class="email">
+            <input type="email" name="email" id="txtemail" placeholder="enter your email" required>
+        </div>
+        <br>
+        <br>
+        Username :-
+        <br>
+        <br>
+        <div class="username">
+            <input type="text" placeholder="enter your name" id="txtname" name="username" required>
+        </div>
+        <br>
+        <br>
+        <input type="submit" value="Submit Form">
+<button>
+
+    <a href="./view.html">
+        view data
+    </a>
+
+</button>
+    </form>
+
+
+    <script>
+        $(document).ready(function () {
+            // Add an event listener for the form submit event
+            $('#myForm').submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Serialize the form data
+                var formData = $(this).serialize();
+                console.log("dadta", formData);
+                // Send an AJAX POST request to the server
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/data', // Replace with your server endpoint
+                    data: formData,
+                    success: function (response) {
+                        console.log("res", response);
+                        // Handle the success response here
+                        window.location.href="./view.html"
+                        $('#result').html(response); // Display the response in the #result div
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors here
+                        console.error('Error:', status, error);
+                    },
+                });
+            });
+        });
+
+
+
+        $(document).ready(function(){
+
+$ajax({
+    url:"/api/get",
+    type:"GET",
+    success:function(data)
+    {
+        const list=$("#displaybody");
+        console.log(list);
+        list.empty();
+
+        data.forEach(function(user){
+            userList.append(`<li>${user.username} - ${user.email}</li>`);
+                console.log("dara",user);
+        } )
+    },
+    error:function(err){
+        console.log(err);
+    }
+})
+})
+    </script>
+
+    <!-- <script>
+        // AJAX request when form is submitted
+        document.getElementById("myForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get the form data
+            const formData = new FormData(document.getElementById("myForm"));
+            console.log("form", formData);
+
+            // document.getElementById('data-form').addEventListener('submit', function (e) {
+            //     e.preventDefault();
+
+            //     const data = document.getElementById('data-field').value;
+
+            fetch('/api/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(email),
+                // body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Data created:', data);
+                    // Handle the response data as needed (e.g., update UI)
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script> -->
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <button id="delete-button">Delete user</button>
+
+    <script>
+        $(document).ready(function () {
+            $("#delete-button").click(function(){
+                const searchUrl = window.location.search
+                id = searchUrl?.split("?")[1]?.split("=")[1]
+
+                $.ajax({
+                    url:`/api/${id}`,
+                    type:"DELETE",
+                    success:function(res){
+                        
+                        console.log(res);
+                    },
+                    error:function(err){
+                        console.log(error);
+                    }
+                    
+                })
+            })
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>

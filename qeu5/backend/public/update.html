@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+  <form action="/api/update/:id" method="POST" enctype="multipart/form-data" id="myForm">
+    Email :-
+    <div class="email">
+      <input type="email" name="email" id="txtemail" placeholder="enter your email" required>
+    </div>
+    <br>
+    <br>
+    Username :-
+    <br>
+    <br>
+    <div class="username">
+      <input type="text" placeholder="enter your name" id="txtname" name="username" required>
+    </div>
+    <br>
+    <br>
+    <input type="submit" value="Submit Form">
+  </form>
+</body>
+
+<script>
+  $(document).ready(function () {
+    $("#myForm").submit(function (e) {
+      e.preventDefault();
+
+      // Get form data
+
+
+      const searchUrl = window.location.search
+      id = searchUrl?.split("?")[1]?.split("=")[1]
+
+
+      const newName = $("#txtname").val();
+      const newEmail = $("#txtemail").val();
+      console.log("dadta", newEmail, newName);
+      // alert(id);
+      // Send data to the server
+      $.ajax({
+        url: `/api/update/${id}`, // Replace with your server route, including the record ID
+        type: "PUT",
+        data: { newName, newEmail },
+        success: function (response) {
+          //   console.log(data);
+          // Handle success
+          // alert(response)
+          console.log("res", response);
+          window.location.href="./view.html"
+        },
+        error: function (error) {
+          // Handle error
+          console.error("err", error);
+        },
+      });
+    });
+  });
+
+
+</script>
+
+</html>
